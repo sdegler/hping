@@ -35,7 +35,7 @@ void	print_statistics(int signal_id)
 	if (out_of_sequence_pkt)
 		fprintf(stderr, "%d out of sequence packets received\n",
 			out_of_sequence_pkt);
-	fprintf(stderr, "round-trip min/avg/max = %.1f/%.1f/%.1f ms\n",
+	fprintf(stderr, "round-trip min/avg/max = %.3f/%.3f/%.3f ms\n",
 		rtt_min, rtt_avg, rtt_max);
 
 	/* manage exit code */

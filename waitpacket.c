@@ -185,14 +185,14 @@ void log_ip(int status, int sequence)
 void log_icmp_ts(void *ts)
 {
 	struct icmp_tstamp_data icmp_tstamp;
-       
+
 	memcpy(&icmp_tstamp, ts, sizeof(icmp_tstamp));
 	printf("ICMP timestamp: Originate=%u Receive=%u Transmit=%u\n",
 		(unsigned int) ntohl(icmp_tstamp.orig),
 		(unsigned int) ntohl(icmp_tstamp.recv),
 		(unsigned int) ntohl(icmp_tstamp.tran));
 	printf("ICMP timestamp RTT tsrtt=%lu\n\n",
-		(long unsigned int) (get_midnight_ut_ms() 
+		(long unsigned int) (get_midnight_ut_ms()
                                      - ntohl(icmp_tstamp.orig)));
 }
 
@@ -321,7 +321,7 @@ int recv_udp(void *packet, size_t size)
 		status = rtt(&sequence, ntohs(udp.uh_dport), &ms_delay);
 		if (!opt_quiet) {
 			log_ip(status, sequence);
-			printf("seq=%d rtt=%.1f ms\n", sequence, ms_delay);
+			printf("seq=%d rtt=%.3f ms\n", sequence, ms_delay);
 		}
 		if (opt_incdport && !opt_force_incdport)
 			dst_port++;
@@ -386,7 +386,7 @@ int recv_tcp(void *packet, size_t size)
 		if (flags[0] == '\0')    strcat(flags, "none");
 
 		log_ip(status, sequence);
-		printf("sport=%d flags=%s seq=%d win=%d rtt=%.1f ms\n",
+		printf("sport=%d flags=%s seq=%d win=%d rtt=%.3f ms\n",
 			ntohs(tcp.th_sport), flags, sequence,
 			ntohs(tcp.th_win), ms_delay);
 
